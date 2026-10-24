@@ -1,0 +1,98 @@
+-- 1. Create a sample database
+CREATE DATABASE sql_practice;
+USE sql_practice;
+
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    department VARCHAR(30),
+    city VARCHAR(30),
+    salary DECIMAL(10,2),
+    age INT,
+    experience INT
+);
+desc Employees;
+INSERT INTO Employees VALUES
+(1, 'Aman',   'IT',      'Delhi',    60000, 24, 2),
+(2, 'Priya',  'HR',      'Mumbai',   45000, 27, 4),
+(3, 'Rahul',  'IT',      'Delhi',    75000, 29, 5),
+(4, 'Neha',   'Finance', 'Chennai',  55000, 26, 3),
+(5, 'Karan',  'IT',      'Mumbai',   50000, 23, 1),
+(6, 'Simran', 'HR',      'Delhi',    65000, 31, 7),
+(7, 'Arjun',  'Finance', 'Mumbai',   40000, 22, 1),
+(8, 'Pooja',  'IT',      'Chennai',  90000, 32, 8),
+(9, 'Vikas',  'Sales',   'Delhi',    45000, 28, 4),
+(10,'Isha',   'Sales',   'Chennai',  70000, 25, 2);
+select*from employees;
+
+-- 2. DISTINCT — remove duplicate values
+-- SELECT DISTINCT column_name FROM table_name      -- basic formate
+
+-- Example 1: Find unique cities
+
+select distinct city from employees;
+
+-- Example 2: Find all unique departments
+select distinct department from employees;
+
+-- Example 3: Unique department and city combinations
+select distinct department,city from employees;
+
+-- Example 4: Count unique departments
+
+select count(distinct department) as total_departments from employees;
+
+-- 3. WHERE — filter records using a condition
+-- WHERE selects only those rows that satisfy a specified condition.
+-- Syntax:SELECT column1, column2 FROM table_name WHERE condition;
+
+-- Example 1: Find employees in IT
+select*from employees where department='IT';
+
+-- Example 2: Find employees earning more than ₹60,000
+
+select*from employees where salary > 60000;
+
+-- Example 3: Find employees from Delhi
+select*from employees where city='Delhi';
+
+-- Example 4: Select specific columns and filter
+SELECT emp_name, department, salary
+FROM Employees
+WHERE department = 'Finance';
+
+ -- Key rules
+-- WHERE comes after FROM.
+-- Text values are written in quotes: 'Delhi'.
+-- Numeric values normally do not require quotes: 60000.
+-- WHERE filters rows before the final result is returned.
+-- Use = for equality, not ==.
+
+
+----------------------- Operators used in SQL ------------------------------
+-- A. Equality operator =
+-- Find employees whose salary is exactly ₹50,000.
+select emp_name,salary from employees where salary=50000;
+
+-- B. Not equal operator <>
+-- Find employees who do not work in HR.
+select emp_name,department from employees where department <> 'HR';
+
+-- C. Greater than >
+-- Find employees older than 25.
+select emp_name,department from employees where age >25;
+
+-- D. Less than <
+-- Find employees earning less than ₹50,000.
+select emp_name,department,salary from employees where salary < 50000;
+
+-- E. Greater than or equal to >=
+-- Find employees earning at least ₹60,000.
+select emp_name,department,salary from employees where salary >=60000;
+
+-- F. Less than or equal to <=
+-- Find employees with three or fewer years of experience.
+SELECT emp_name, experience
+FROM Employees
+WHERE experience <= 3;
+
